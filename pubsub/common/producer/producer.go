@@ -39,7 +39,7 @@ func main() {
 
 	ctx := context.Background()
 
-	for i := 0; i < 10000; i++ {
+	for i := 0; i < 100; i++ {
 		if msgId, err := producer.Send(ctx, &pulsar.ProducerMessage{
 			Payload: []byte(fmt.Sprintf("hello-%d", i)),
 		}); err != nil {
