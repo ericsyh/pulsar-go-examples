@@ -13,9 +13,11 @@ func main() {
 
 	var pulsarUSL string
 	var topicName string
+	var msgNumber int
 
 	flag.StringVar(&pulsarUSL, "u", "", "")
 	flag.StringVar(&topicName, "t", "", "")
+	flag.IntVar(&msgNumber, "n", 1, "")
 	flag.Parse()
 
 	client, err := pulsar.NewClient(pulsar.ClientOptions{
@@ -39,7 +41,7 @@ func main() {
 
 	ctx := context.Background()
 
-	for i := 0; i < 100; i++ {
+	for i := 0; i < msgNumber; i++ {
 		if msgId, err := producer.Send(ctx, &pulsar.ProducerMessage{
 			Payload: []byte(fmt.Sprintf("hello-%d", i)),
 		}); err != nil {
